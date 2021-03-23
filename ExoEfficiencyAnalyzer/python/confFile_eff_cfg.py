@@ -4,7 +4,8 @@ process = cms.Process("exoefficiency")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(10) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+
 
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
@@ -24,7 +25,7 @@ process.exoeff = cms.EDAnalyzer('ExoEfficiencyAnalyzer',
     genInfo = cms.InputTag("generator", "", "SIM"),
     slimmedAddPileupInfo = cms.InputTag("slimmedAddPileupInfo", "", "PAT"),
     BeamHaloSummary = cms.InputTag("BeamHaloSummary", "", "RECO"),
-    photonsMiniAOD = cms.InputTag("slimmedPhotons", "", "PAT"),
+    photonsMiniAOD = cms.InputTag("slimmedPhotons"),
     #minPhotonPt = cms.double(125.),
 )
 

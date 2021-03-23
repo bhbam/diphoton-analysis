@@ -251,30 +251,33 @@ namespace ExoDiPhotons
     photonInfo.isEBEEGap   = photon->isEBEEGap();
 
     // systematic variations, normalized to photon energy
-    float energy = photon->energy();
-    photonInfo.ecalEnergyPreCorr = photon->userFloat("ecalEnergyPreCorr") / energy;
-    photonInfo.ecalEnergyErrPreCorr = photon->userFloat("ecalEnergyErrPreCorr") / energy;
-    photonInfo.ecalEnergyPostCorr = photon->userFloat("ecalEnergyPostCorr") / energy;
-    photonInfo.ecalEnergyErrPostCorr = photon->userFloat("ecalEnergyErrPostCorr") / energy;
-    photonInfo.energyScaleValue = photon->userFloat("energyScaleValue") / energy;
-    photonInfo.energySigmaValue = photon->userFloat("energySigmaValue") / energy;
-    photonInfo.energySmearNrSigma = photon->userFloat("energySmearNrSigma") / energy;
-    photonInfo.energyScaleUp = photon->userFloat("energyScaleUp") / energy;
-    photonInfo.energyScaleDown = photon->userFloat("energyScaleDown") / energy;
-    photonInfo.energyScaleStatUp = photon->userFloat("energyScaleStatUp") / energy;
-    photonInfo.energyScaleStatDown = photon->userFloat("energyScaleStatDown") / energy;
-    photonInfo.energyScaleSystUp = photon->userFloat("energyScaleSystUp") / energy;
-    photonInfo.energyScaleSystDown = photon->userFloat("energyScaleSystDown") / energy;
-    photonInfo.energyScaleGainUp = photon->userFloat("energyScaleGainUp") / energy;
-    photonInfo.energyScaleGainDown = photon->userFloat("energyScaleGainDown") / energy;
-    photonInfo.energyScaleEtUp = photon->userFloat("energyScaleEtUp") / energy;
-    photonInfo.energyScaleEtDown = photon->userFloat("energyScaleEtDown") / energy;
-    photonInfo.energySigmaUp = photon->userFloat("energySigmaUp") / energy;
-    photonInfo.energySigmaDown = photon->userFloat("energySigmaDown") / energy;
-    photonInfo.energySigmaPhiUp = photon->userFloat("energySigmaPhiUp") / energy;
-    photonInfo.energySigmaPhiDown = photon->userFloat("energySigmaPhiDown") / energy;
-    photonInfo.energySigmaRhoUp = photon->userFloat("energySigmaRhoUp") / energy;
-    photonInfo.energySigmaRhoDown = photon->userFloat("energySigmaRhoDown") / energy;
+// I comment this because I faced runtime error :  Requested UserFloat ecalEnergyPreCorr is not available! Possible UserFloats are:
+// PhotonMVAEstimatorRun2Spring16NonTrigV1Values PhotonMVAEstimatorRunIIFall17v1Values PhotonMVAEstimatorRunIIFall17v1p1Values
+// phoChargedIsolation phoNeutralHadronIsolation phoPhotonIsolation phoWorstChargedIsolation 
+    // float energy = photon->energy();
+    // photonInfo.ecalEnergyPreCorr = photon->userFloat("ecalEnergyPreCorr") / energy;
+    // photonInfo.ecalEnergyErrPreCorr = photon->userFloat("ecalEnergyErrPreCorr") / energy;
+    // photonInfo.ecalEnergyPostCorr = photon->userFloat("ecalEnergyPostCorr") / energy;
+    // photonInfo.ecalEnergyErrPostCorr = photon->userFloat("ecalEnergyErrPostCorr") / energy;
+    // photonInfo.energyScaleValue = photon->userFloat("energyScaleValue") / energy;
+    // photonInfo.energySigmaValue = photon->userFloat("energySigmaValue") / energy;
+    // photonInfo.energySmearNrSigma = photon->userFloat("energySmearNrSigma") / energy;
+    // photonInfo.energyScaleUp = photon->userFloat("energyScaleUp") / energy;
+    // photonInfo.energyScaleDown = photon->userFloat("energyScaleDown") / energy;
+    // photonInfo.energyScaleStatUp = photon->userFloat("energyScaleStatUp") / energy;
+    // photonInfo.energyScaleStatDown = photon->userFloat("energyScaleStatDown") / energy;
+    // photonInfo.energyScaleSystUp = photon->userFloat("energyScaleSystUp") / energy;
+    // photonInfo.energyScaleSystDown = photon->userFloat("energyScaleSystDown") / energy;
+    // photonInfo.energyScaleGainUp = photon->userFloat("energyScaleGainUp") / energy;
+    // photonInfo.energyScaleGainDown = photon->userFloat("energyScaleGainDown") / energy;
+    // photonInfo.energyScaleEtUp = photon->userFloat("energyScaleEtUp") / energy;
+    // photonInfo.energyScaleEtDown = photon->userFloat("energyScaleEtDown") / energy;
+    // photonInfo.energySigmaUp = photon->userFloat("energySigmaUp") / energy;
+    // photonInfo.energySigmaDown = photon->userFloat("energySigmaDown") / energy;
+    // photonInfo.energySigmaPhiUp = photon->userFloat("energySigmaPhiUp") / energy;
+    // photonInfo.energySigmaPhiDown = photon->userFloat("energySigmaPhiDown") / energy;
+    // photonInfo.energySigmaRhoUp = photon->userFloat("energySigmaRhoUp") / energy;
+    // photonInfo.energySigmaRhoDown = photon->userFloat("energySigmaRhoDown") / energy;
   }
 
   void FillPhotonIDInfo(photonInfo_t &photonInfo, const pat::Photon *photon, double rho, double isSat)

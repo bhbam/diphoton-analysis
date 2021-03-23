@@ -1,0 +1,111 @@
+19-Mar-2021 16:25:28 CDT  Initiating request to open file file:/uscms/home/bbbam/mc_RunIIAutumn18MiniAOD_ADDGravToGG_NegInt-0_LambdaT-10000_M-500To1000_TuneCP2_13TeV-pythia8_MINIAODSIM_102X_upgrade2018_realistic_v15-v1_70000_5C1E393E-C20D-E84F-9CD0-6399FA05DE2D.root
+19-Mar-2021 16:25:30 CDT  Successfully opened file file:/uscms/home/bbbam/mc_RunIIAutumn18MiniAOD_ADDGravToGG_NegInt-0_LambdaT-10000_M-500To1000_TuneCP2_13TeV-pythia8_MINIAODSIM_102X_upgrade2018_realistic_v15-v1_70000_5C1E393E-C20D-E84F-9CD0-6399FA05DE2D.root
+Begin processing the 1st record. Run 1, Event 65003, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.359 CDT
+genPhoton pt:229.394 ; eta:-0.0555815 ; phi:-0.921358; pdgId:22 status:23
+genPhoton pt:229.394 ; eta:-1.69593 ; phi:2.22023; pdgId:22 status:23
+genPhoton pt:323.167 ; eta:-0.362378 ; phi:-0.875112; pdgId:22 status:1
+genPhoton pt:143.155 ; eta:-2.2255 ; phi:1.77385; pdgId:22 status:1
+genPhoton pt:67.4674 ; eta:-1.53713 ; phi:2.83146; pdgId:22 status:1
+genPhoton pt:25.949 ; eta:-1.58186 ; phi:2.80817; pdgId:22 status:1
+N pat photons   =2
+Photon pt:332.266 ; eta:-0.365009 ; phi:-0.872939
+Photon pt:140.626 ; eta:-2.22626 ; phi:1.77584
+Begin processing the 2nd record. Run 1, Event 65008, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.437 CDT
+genPhoton pt:89.5277 ; eta:3.87325 ; phi:-0.526594; pdgId:22 status:23
+genPhoton pt:89.5277 ; eta:0.225147 ; phi:2.615; pdgId:22 status:23
+genPhoton pt:89.3761 ; eta:3.87998 ; phi:-0.605969; pdgId:22 status:1
+genPhoton pt:68.209 ; eta:-0.0544876 ; phi:2.56563; pdgId:22 status:1
+genPhoton pt:0.193385 ; eta:-1.32469 ; phi:1.60668; pdgId:22 status:1
+N pat photons   =2
+Photon pt:66.5624 ; eta:-0.0551427 ; phi:2.56517
+Photon pt:13.0075 ; eta:1.28031 ; phi:-1.1716
+Begin processing the 3rd record. Run 1, Event 65002, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.437 CDT
+genPhoton pt:74.5329 ; eta:2.17266 ; phi:1.71237; pdgId:22 status:23
+genPhoton pt:74.5329 ; eta:-1.74903 ; phi:-1.42922; pdgId:22 status:23
+genPhoton pt:80.918 ; eta:2.09614 ; phi:1.27718; pdgId:22 status:1
+genPhoton pt:74.5692 ; eta:-1.74439 ; phi:-1.37701; pdgId:22 status:1
+genPhoton pt:1.44134 ; eta:-3.49762 ; phi:1.01315; pdgId:22 status:1
+N pat photons   =2
+Photon pt:76.9775 ; eta:-1.74353 ; phi:-1.37644
+Photon pt:72.2587 ; eta:2.09644 ; phi:1.28303
+Begin processing the 4th record. Run 1, Event 65007, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.437 CDT
+genPhoton pt:104.921 ; eta:0.0800725 ; phi:-1.67534; pdgId:22 status:23
+genPhoton pt:104.921 ; eta:-3.54761 ; phi:1.46625; pdgId:22 status:23
+genPhoton pt:103.039 ; eta:0.0986743 ; phi:-1.69003; pdgId:22 status:1
+genPhoton pt:100.507 ; eta:-3.59338 ; phi:1.5083; pdgId:22 status:1
+genPhoton pt:0.140124 ; eta:3.99809 ; phi:-0.811796; pdgId:22 status:1
+N pat photons   =1
+Photon pt:102.877 ; eta:0.128028 ; phi:-1.68974
+Begin processing the 5th record. Run 1, Event 65001, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.438 CDT
+genPhoton pt:142.074 ; eta:-0.225579 ; phi:-0.915313; pdgId:22 status:23
+genPhoton pt:142.074 ; eta:3.19404 ; phi:2.22628; pdgId:22 status:23
+genPhoton pt:47.7757 ; eta:-1.3699 ; phi:-0.305649; pdgId:22 status:1
+genPhoton pt:157.628 ; eta:3.08215 ; phi:2.14261; pdgId:22 status:1
+N pat photons   =2
+Photon pt:46.2479 ; eta:-1.37151 ; phi:-0.304964
+Photon pt:22.4692 ; eta:0.0994599 ; phi:-1.09706
+Begin processing the 6th record. Run 1, Event 65011, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.439 CDT
+genPhoton pt:96.2031 ; eta:3.6532 ; phi:2.57733; pdgId:22 status:23
+genPhoton pt:96.2031 ; eta:-0.469828 ; phi:-0.564264; pdgId:22 status:23
+genPhoton pt:144.189 ; eta:3.34191 ; phi:2.72574; pdgId:22 status:1
+genPhoton pt:95.377 ; eta:-0.369442 ; phi:-0.566664; pdgId:22 status:1
+N pat photons   =1
+Photon pt:96.4339 ; eta:-0.370153 ; phi:-0.566708
+Begin processing the 7th record. Run 1, Event 65004, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.439 CDT
+genPhoton pt:318.334 ; eta:-0.0106697 ; phi:0.439123; pdgId:22 status:23
+genPhoton pt:318.334 ; eta:-0.2536 ; phi:-2.70247; pdgId:22 status:23
+genPhoton pt:312.855 ; eta:0.00435348 ; phi:0.383658; pdgId:22 status:1
+genPhoton pt:324.113 ; eta:-0.258108 ; phi:-2.64593; pdgId:22 status:1
+genPhoton pt:0.409589 ; eta:5.70806 ; phi:1.84906; pdgId:22 status:1
+genPhoton pt:1.39339 ; eta:4.49175 ; phi:-1.71081; pdgId:22 status:1
+N pat photons   =3
+Photon pt:329.397 ; eta:-0.213668 ; phi:-2.64527
+Photon pt:311.235 ; eta:0.0491389 ; phi:0.383177
+Photon pt:13.3798 ; eta:-2.46052 ; phi:-0.286272
+Begin processing the 8th record. Run 1, Event 65006, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.440 CDT
+genPhoton pt:303.071 ; eta:-0.795717 ; phi:-1.89141; pdgId:22 status:23
+genPhoton pt:303.071 ; eta:-2.52964 ; phi:1.25018; pdgId:22 status:23
+genPhoton pt:300.446 ; eta:-0.789452 ; phi:-1.88382; pdgId:22 status:1
+genPhoton pt:305.742 ; eta:-2.5233 ; phi:1.24521; pdgId:22 status:1
+N pat photons   =2
+Photon pt:313.971 ; eta:-2.50899 ; phi:1.24463
+Photon pt:304.518 ; eta:-0.772528 ; phi:-1.88258
+Begin processing the 9th record. Run 1, Event 65005, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.440 CDT
+genPhoton pt:265.375 ; eta:-0.629073 ; phi:1.42565; pdgId:22 status:23
+genPhoton pt:265.375 ; eta:-2.21239 ; phi:-1.71594; pdgId:22 status:23
+genPhoton pt:266.683 ; eta:-0.623762 ; phi:1.49589; pdgId:22 status:1
+genPhoton pt:265.092 ; eta:-2.20259 ; phi:-1.72485; pdgId:22 status:1
+genPhoton pt:0.512032 ; eta:0.66311 ; phi:-0.0894701; pdgId:22 status:1
+N pat photons   =3
+Photon pt:266.462 ; eta:-2.19712 ; phi:-1.7254
+Photon pt:265.018 ; eta:-0.617155 ; phi:1.49623
+Photon pt:23.713 ; eta:0.168844 ; phi:1.22203
+Begin processing the 10th record. Run 1, Event 65015, LumiSection 66 on stream 0 at 19-Mar-2021 16:25:31.441 CDT
+genPhoton pt:255.771 ; eta:1.9428 ; phi:-0.528677; pdgId:22 status:23
+genPhoton pt:255.771 ; eta:0.54636 ; phi:2.61292; pdgId:22 status:23
+genPhoton pt:252.145 ; eta:1.9361 ; phi:-0.541262; pdgId:22 status:1
+genPhoton pt:265.558 ; eta:0.577222 ; phi:2.67217; pdgId:22 status:1
+N pat photons   =2
+Photon pt:269.22 ; eta:0.579298 ; phi:2.6723
+Photon pt:254.402 ; eta:1.93725 ; phi:-0.541039
+19-Mar-2021 16:25:31 CDT  Closed file file:/uscms/home/bbbam/mc_RunIIAutumn18MiniAOD_ADDGravToGG_NegInt-0_LambdaT-10000_M-500To1000_TuneCP2_13TeV-pythia8_MINIAODSIM_102X_upgrade2018_realistic_v15-v1_70000_5C1E393E-C20D-E84F-9CD0-6399FA05DE2D.root
+
+=============================================
+
+MessageLogger Summary
+
+ type     category        sev    module        subroutine        count    total
+ ---- -------------------- -- ---------------- ----------------  -----    -----
+    1 fileAction           -s file_close                             1        1
+    2 fileAction           -s file_open                              2        2
+
+ type    category    Examples: run/evt        run/evt          run/evt
+ ---- -------------------- ---------------- ---------------- ----------------
+    1 fileAction           PostGlobalEndRun                  
+    2 fileAction           pre-events       pre-events       
+
+Severity    # Occurrences   Total Occurrences
+--------    -------------   -----------------
+System                  3                   3
+
+dropped waiting message count 0
