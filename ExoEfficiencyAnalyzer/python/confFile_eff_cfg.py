@@ -1,11 +1,24 @@
 import FWCore.ParameterSet.Config as cms
 
-process = cms.Process("exoefficiency")
+# from os.path import basename
+# import os
+# import sys
+# import importlib
+# submit_utils = importlib.import_module("diphoton-analysis.CommonClasses.submit_utils")
 
-process.load("FWCore.MessageService.MessageLogger_cfi")
+# JEC = cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])
+# process.load("FWCore.MessageService.MessageLogger_cfi")
+
+process = cms.Process("exoefficiency")
+# process.load("FWCore.MessageService.MessageLogger_cfi")
+# process.MessageLogger.cerr.FwkReport.reportEvery = 100
+# process.MessageLogger.suppressWarning.append('ExoEfficiencyAnalyzer')
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
+# process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_cff')
+#
+# process.load("Configuration.StandardSequences.GeometryDB_cff")
 
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
@@ -26,6 +39,9 @@ process.exoeff = cms.EDAnalyzer('ExoEfficiencyAnalyzer',
     slimmedAddPileupInfo = cms.InputTag("slimmedAddPileupInfo", "", "PAT"),
     BeamHaloSummary = cms.InputTag("BeamHaloSummary", "", "RECO"),
     photonsMiniAOD = cms.InputTag("slimmedPhotons"),
+    rho = cms.InputTag("fixedGridRhoAll"),
+    vertices = cms.InputTag("offlineSlimmedPrimaryVertices"),
+    beamSpot = cms.InputTag("offlineBeamSpot", "", "RECO")
     #minPhotonPt = cms.double(125.),
 )
 
