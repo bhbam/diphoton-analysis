@@ -78,7 +78,7 @@
  #include "DataFormats/Common/interface/TriggerResults.h"
  #include "FWCore/Common/interface/TriggerNames.h"
 
-
+////-------------------------------------------------------------------------------------------------------------------
 
 //
 // class declaration
@@ -202,7 +202,7 @@ int nPV_;
 
 
 };
-
+////----------------------------------------------------------------------------------------------------------------------------------
 //
 // constants, enums and typedefs
 //
@@ -254,9 +254,9 @@ ExoEfficiencyAnalyzer::ExoEfficiencyAnalyzer(const edm::ParameterSet& iConfig)
 
 
 
-   //now do what ever initialization is needed
-}
 
+}
+////--------------------------------------------------------------------------------------------------------------------------------
 ExoEfficiencyAnalyzer::~ExoEfficiencyAnalyzer()
 {
 
@@ -264,7 +264,7 @@ ExoEfficiencyAnalyzer::~ExoEfficiencyAnalyzer()
    // (e.g. close files, deallocate resources etc.)
 
 }
-
+////---------------------------------------------------------------------------------------------------------------------------------
 
 //
 // member functions
@@ -388,7 +388,7 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
   {  // begain for loop
     edm::Ptr<const reco::GenParticle> gen = genParticles->ptrAt(i);
     if (gen->status()==1 && gen->pdgId() == 22)
-    { genPhotons.push_back(gen);// status still need to be make sure == 1 or == 3?
+    { genPhotons.push_back(gen);// status still need to be make sure == 1 or == 3
 
       std::cout<<"genPhoton  pt: " <<gen->pt()<<" ; eta  :"<< gen->eta() <<" ; phi   :"<< gen->phi()<<std::endl;//"; pdgId:"<<gen->pdgId() <<
     }
@@ -646,6 +646,7 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
 
 
 // ------------ method called once each job just before starting event loop  ------------
+////-------------------------------------------------------------------------------------------------------------------------------------------
 void
 ExoEfficiencyAnalyzer::beginJob()
 {
@@ -659,7 +660,8 @@ ExoEfficiencyAnalyzer::endJob()
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
 void
-ExoEfficiencyAnalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+ExoEfficiencyAnalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions)
+{
   //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
