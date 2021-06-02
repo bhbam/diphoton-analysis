@@ -92,7 +92,8 @@
 
 using reco::TrackCollection;
 
-class ExoEfficiencyAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
+class ExoEfficiencyAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>
+{
    public:
       explicit ExoEfficiencyAnalyzer(const edm::ParameterSet&);
       ~ExoEfficiencyAnalyzer();
@@ -106,99 +107,50 @@ class ExoEfficiencyAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResour
       virtual void endJob() override;
 
       // ----------member data ---------------------------
-//edm::EDGetTokenT<TrackCollection> tracksToken_;  //used to select what tracks to read from configuration file
 
 
-edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesToken_;
+  edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesToken_;
 
-edm::EDGetTokenT<GenEventInfoProduct>           genInfoToken_;
+  edm::EDGetTokenT<GenEventInfoProduct>           genInfoToken_;
 
-edm::EDGetTokenT<std::vector<PileupSummaryInfo> > pileupToken_;
+  edm::EDGetTokenT<std::vector<PileupSummaryInfo> > pileupToken_;
 
-edm::EDGetToken beamHaloSummaryToken_;
+  edm::EDGetToken beamHaloSummaryToken_;
 
-edm::EDGetToken photonsMiniAODToken_;
+  edm::EDGetToken photonsMiniAODToken_;
 
-edm::EDGetTokenT<double> rhoToken_;
-double rho_;
+  edm::EDGetTokenT<double> rhoToken_;
+  double rho_;
 
-edm::EDGetTokenT<reco::VertexCollection> verticesToken_;
+  edm::EDGetTokenT<reco::VertexCollection> verticesToken_;
 
-edm::EDGetTokenT<reco::BeamSpot> beamSpotToken_;
-
-// bool fPhoton1Info.isSaturated = 0; // Currently set to false but need to checkout global tag stuffs to do it correctly
-// bool fPhoton2Info.isSaturated = 0; // Currently set to false but need to checkout global tag stuffs t0 do it correctly
-bool isSat = false;
-// edm::InputTag recHitsEBTag_;
-// edm::InputTag recHitsEETag_;
-// edm::EDGetTokenT<EcalRecHitCollection> recHitsEBToken;
-// edm::EDGetTokenT<EcalRecHitCollection> recHitsEEToken;
-//
-// const CaloSubdetectorTopology* subDetTopologyEB_;
-// const CaloSubdetectorTopology* subDetTopologyEE_;
-
-edm::Service<TFileService> fs;
+  edm::EDGetTokenT<reco::BeamSpot> beamSpotToken_;
 
 
-// output file name
- //TString outputFile_;
- // number of events in sample
- //uint32_t nEventsSample_;
+  bool isSat = false; // Currently set to false but need to checkout global tag stuffs to do it correctly
 
-TTree *fTree;
-ExoDiPhotons::eventInfo_t fEventInfo;
-ExoDiPhotons::genParticleInfo_t fGenPhoton1; // leading
-ExoDiPhotons::genParticleInfo_t fGenPhoton2; // subleading
-ExoDiPhotons::photonInfo_t fPhoton1Info;
-ExoDiPhotons::photonInfo_t fPhoton2Info;
-ExoDiPhotons::vertexInfo_t fVertex0Info;
-ExoDiPhotons::vertexInfo_t fPrimaryVertexInfo;
-ExoDiPhotons::beamSpotInfo_t fBeamSpotInfo;
 
-int nPV_;
-
-// enum
-//   {
-//     LOOSE = 0,
-//     MEDIUM = 1,
-//     TIGHT = 2
-//   };
-//
-// enum
-//   {
-//     FAKE = 0,
-//     TRUE = 1
-//   };
-
-// struct eventInfo_t {
-//   Long64_t run;
-//   Long64_t LS;
-//   Long64_t evnum;
-// };
-//eventInfo_t fEventInfo;
-// struct photonInfo_t{
-//   double pt;
-//   double eta;
-//   double phi;
-//
-// };
-// photonInfo_t fPhoton1Info;
-// photonInfo_t fPhoton2Info;
+  edm::Service<TFileService> fs;
 
 
 
-// edm::Service<TFileService> fs;
-//edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesToken_;
-// edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesMiniAODToken_;
-// edm::EDGetTokenT<GenEventInfoProduct>           genInfoToken_;
-//
-// edm::InputTag genParticles_;
-// TTree *fTree;
-//
-//
-//  ExoDiPhotons::eventInfo_t         fEventInfo;
-//  ExoDiPhotons::genParticleInfo_t   fGenPhotonInfo; // Each entry is an in an individual photons not whole event
-//  int fGenPhotonNumber;
+
+  TTree *fTree;
+  ExoDiPhotons::eventInfo_t fEventInfo;
+  ExoDiPhotons::genParticleInfo_t fGenPhoton1; // leading
+  ExoDiPhotons::genParticleInfo_t fGenPhoton2; // subleading
+  ExoDiPhotons::photonInfo_t fPhoton1Info;
+  ExoDiPhotons::photonInfo_t fPhoton2Info;
+  ExoDiPhotons::vertexInfo_t fVertex0Info;
+  ExoDiPhotons::vertexInfo_t fPrimaryVertexInfo;
+  ExoDiPhotons::beamSpotInfo_t fBeamSpotInfo;
+
+  int nPV_;
+
+
+
+
+
 
 
 };
@@ -246,8 +198,7 @@ ExoEfficiencyAnalyzer::ExoEfficiencyAnalyzer(const edm::ParameterSet& iConfig)
     fTree->Branch("PrimaryVertex",&fPrimaryVertexInfo,ExoDiPhotons::vertexBranchDefString.c_str());
     fTree->Branch("nPV", &nPV_);
     fTree->Branch("BeamSpot",&fBeamSpotInfo,ExoDiPhotons::beamSpotBranchDefString.c_str());
-    // fTree->Branch("Photon1", &fPhoton1Info, "pt/D:eta:phi");
-    // fTree->Branch("Photon2", &fPhoton2Info, "pt/D:eta:phi");
+
 
 
 
@@ -318,15 +269,6 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
 
 
 
-  // edm::Handle<EcalRecHitCollection> recHitsEB;
-  // iEvent.getByToken(recHitsEBToken,recHitsEB);
-  // edm::Handle<EcalRecHitCollection> recHitsEE;
-  // iEvent.getByToken(recHitsEEToken,recHitsEE);
-  //
-  // edm::ESHandle<CaloTopology> caloTopology;
-  // iSetup.get<CaloTopologyRecord>().get(caloTopology);
-  // subDetTopologyEB_ = caloTopology->getSubdetectorTopology(DetId::Ecal,EcalBarrel);
-  // subDetTopologyEE_ = caloTopology->getSubdetectorTopology(DetId::Ecal,EcalEndcap);
 
 
 
@@ -342,16 +284,7 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
   ExoDiPhotons::InitBeamSpotInfo(fBeamSpotInfo);
 
 
-  // fEventInfo.run = -99999.99;
-  // fEventInfo.LS = -99999.99;
-  // fEventInfo.evnum = -99999.99;
 
-  // fPhoton1Info.pt = -99999.99;
-  // fPhoton1Info.eta =-99999.99;
-  // fPhoton1Info.phi =-99999.99;
-  // fPhoton2Info.pt =-99999.99;
-  // fPhoton2Info.eta =-99999.99;
-  // fPhoton2Info.phi =-99999.99;
 
   ExoDiPhotons::FillBasicEventInfo(fEventInfo, iEvent);
   ExoDiPhotons::FillGenEventInfo(fEventInfo, &(*genInfo));
@@ -359,56 +292,35 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
   ExoDiPhotons::FillBeamHaloEventInfo(fEventInfo, bhs);
   ExoDiPhotons::FillVertexInfo(fVertex0Info,&(vertices->at(0)));
   ExoDiPhotons::FillBeamSpotInfo(fBeamSpotInfo,&(*beamSpotHandle));
-  //ExoDiPhotons::FillEventWeights(fEventInfo, outputFile_, nEventsSample_);
 
-  // for(size_t i=0; i<genParticles->size(); i++) {
-  // const auto gen = genParticles->ptrAt(i);
-  // if(gen->pdgId()==22){
-  // //genphotoncount++;
-  //   double pt = gen->pt();
-  //   double eta = gen->eta();
-  //   double phi = gen->phi();
-  //   if (pt> fGenPhoton1.pt){
-  //       fGenPhoton2.pt = fGenPhoton1.pt;
-  //       fGenPhoton2.eta = fGenPhoton1.eta;
-  //       fGenPhoton2.phi = fGenPhoton1.phi;
-  //       fGenPhoton1.pt = pt;
-  //       fGenPhoton1.eta = eta;
-  //       fGenPhoton1.phi = phi;
-  //     }
-  //   if ((pt< fGenPhoton1.pt) && (pt> fGenPhoton2.pt)){
-  //       fGenPhoton2.pt = pt;
-  //       fGenPhoton2.eta = eta;
-  //       fGenPhoton2.phi = phi;
-  //     }}}
 
   std::vector< edm::Ptr<const reco::GenParticle> > genPhotons;
   std::cout<<"Numer of gen Particles: "<<genParticles->size()<<std::endl;
+// for Photons------------------------------------------------
+  // for (size_t i = 0; i < genParticles->size(); ++i)
+  // {
+  //   edm::Ptr<const reco::GenParticle> gen = genParticles->ptrAt(i);
+  //   if (gen->status()==1 && gen->pdgId() == 22)
+  //   {
+  //       genPhotons.push_back(gen);// status still need to be make sure == 1 or == 3
+  //       std::cout<<"genPhoton  pt  :  " <<gen->pt()<<" ; eta  :  "<< gen->eta() <<" ; phi   :  "<< gen->phi()<< ";  status   :  "<<gen->status() <<std::endl;
+  //   }
+  // }
+  // std::cout<<"Numer of gen photons:   "<<genPhotons.size()<<std::endl;
+
+//for electrons------------------------------------------------
   for (size_t i = 0; i < genParticles->size(); ++i)
-  {  // begain for loop
+  {
     edm::Ptr<const reco::GenParticle> gen = genParticles->ptrAt(i);
-    if (gen->status()==1 && gen->pdgId() == 22)
-    { genPhotons.push_back(gen);// status still need to be make sure == 1 or == 3
-
-      std::cout<<"genPhoton  pt: " <<gen->pt()<<" ; eta  :"<< gen->eta() <<" ; phi   :"<< gen->phi()<<std::endl;//"; pdgId:"<<gen->pdgId() <<
+    if (gen->status()==1 && (gen->pdgId() == 11 || gen->pdgId() == -11))
+    {
+      genPhotons.push_back(gen);// status still need to be make sure
+      std::cout<<"genElectron  pt  :  " <<gen->pt()<<" ; eta  :  "<< gen->eta() <<" ; phi   :  "<< gen->phi()<< " ; pdgId  :  "<< gen->pdgId()<<";  status   :  "<<gen->status() <<std::endl;
     }
-  } // end of genParticle loop.
-  std::cout<<"Numer of gen photons:   "<<genPhotons.size()<<std::endl;
+  }
+  std::cout<<"Numer of gen Electrons:   "<<genPhotons.size()<<std::endl;
+//------------------------------------------------------------------------
 
-  // sort(genPhotons.begin(), genPhotons.end(), ExoDiPhotons::comparePhotonsByPt);
-  // const reco::GenParticle *genPhoton1 = &(*genPhotons.at(0));
-  // const reco::GenParticle *genPhoton2 = &(*genPhotons.at(1));
-  // ExoDiPhotons::FillGenParticleInfo(fGenPhoton1, genPhoton1);
-  // ExoDiPhotons::FillGenParticleInfo(fGenPhoton2, genPhoton2);
-
-  // std::vector<edm::Ptr<const pat::Photon>> patPhotons;
-  // std::cout<<"Numer of pat Photons  ="<<photons->size()<<std::endl;
-  // for (size_t i = 0; i < photons->size(); ++i)
-  // {   // begain for loop
-  //   edm::Ptr<const pat::Photon> pho = photons->ptrAt(i);
-  //   patPhotons.push_back(pho);
-  //   std::cout<<"pat Photon pt:" <<pho->pt()<<" ; eta:"<< pho->eta() <<" ; phi:"<< pho->phi()<< std::endl;
-  // }//end for loop
 
   float mindeltaR = 0.5;
   std::cout<<"Numer of pat Photons: "<<photons->size()<<std::endl;
@@ -482,147 +394,6 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
     }
   }
   ExoDiPhotons::FillVertexInfo(fPrimaryVertexInfo,&(*myPV));
-
-
-    // if(genPhotons.size() == 1)
-    // {
-    //   const reco::GenParticle *genPhoton1 = &(*genPhotons.at(0));
-    //   ExoDiPhotons::FillGenParticleInfo(fGenPhoton1, genPhoton1);
-    //   std::vector<float> deltaR0;
-    //   for (size_t i = 0; i < patPhotons.size(); i++)
-    //   {
-    //   float deltar0 = reco::deltaR(genPhotons[0]->eta(), genPhotons[0]->phi(), patPhotons[i]->eta(), patPhotons[i]->phi());
-    //
-    //   deltaR0.push_back(deltar0);
-    //
-    //   }
-    //   float deltaR0min = *std::min_element(deltaR0.begin(),deltaR0.end());
-    //
-    //
-    //   for(size_t i =0; i < deltaR0.size(); i++)
-    //   {
-    //     if(deltaR0min == deltaR0[i])
-    //     {
-    //       const pat::Photon *patPhoton1 = &(*patPhotons[i]);
-    //       //fPhoton1Info.isSaturated = ExoDiPhotons::isSaturated(patPhoton1, &(*recHitsEB), &(*recHitsEE), &(*subDetTopologyEB_), &(*subDetTopologyEE_));
-    //       ExoDiPhotons::FillBasicPhotonInfo(fPhoton1Info, patPhoton1);
-    //       ExoDiPhotons::FillPhotonIDInfo(fPhoton1Info, patPhoton1, rho_, isSat);
-    //     }
-    //   }
-    //
-    // }
-
-// if there are more than 1 GenParticles that passes pdgId and status
-  // if(genPhotons.size() > 1)
-  // {
-  //   sort(genPhotons.begin(), genPhotons.end(), ExoDiPhotons::comparePhotonsByPt);
-  //   const reco::GenParticle *genPhoton1 = &(*genPhotons.at(0));
-  //   const reco::GenParticle *genPhoton2 = &(*genPhotons.at(1));
-  //   ExoDiPhotons::FillGenParticleInfo(fGenPhoton1, genPhoton1);
-  //   ExoDiPhotons::FillGenParticleInfo(fGenPhoton2, genPhoton2);
-  //
-  //   if(patPhotons.size() == 1)
-  //   {
-  //     const pat::Photon *patPhoton1 = &(*patPhotons.at(0));
-  //     float deltaR0 = reco::deltaR(genPhoton1->eta(), genPhoton1->phi(), patPhoton1->eta(), patPhoton1->phi());
-  //     float deltaR1 = reco::deltaR(genPhoton2->eta(), genPhoton2->phi(), patPhoton1->eta(), patPhoton1->phi());
-  //     if (deltaR0 <= deltaR1)
-  //     {
-  //       ExoDiPhotons::FillBasicPhotonInfo(fPhoton1Info, patPhoton1);
-  //       ExoDiPhotons::FillPhotonIDInfo(fPhoton1Info, patPhoton1, rho_, isSat);
-  //     }
-  //     else
-  //     {
-  //       ExoDiPhotons::FillBasicPhotonInfo(fPhoton2Info, patPhoton1);
-  //       ExoDiPhotons::FillPhotonIDInfo(fPhoton2Info, patPhoton1, rho_, isSat);
-  //     }
-  //   }
-  //
-  //   if (patPhotons.size() > 1)
-  //   {
-  //     for(size_t i=0; i < patPhotons.size(); i++)
-  //     {
-  //       float deltaR0 = reco::deltaR(genPhoton1->eta(), genPhoton1->phi(), patPhotons[i]->eta(), patPhotons[i]->phi());
-  //       float deltaR1 = reco::deltaR(genPhoton2->eta(), genPhoton2->phi(), patPhotons[i]->eta(), patPhotons[i]->phi());
-  //       if(mindeltaR0 >= deltaR0)
-  //       {
-  //         mindeltaR0 = deltaR0;
-  //         const pat::Photon *patPhoton1 = &(*patPhotons[i]);
-  //         ExoDiPhotons::FillBasicPhotonInfo(fPhoton1Info, patPhoton1);
-  //         ExoDiPhotons::FillPhotonIDInfo(fPhoton1Info, patPhoton1, rho_, isSat);
-  //       }
-  //       if(mindeltaR1 >= deltaR1)
-  //       {
-  //         mindeltaR1 = deltaR0;
-  //         const pat::Photon *patPhoton2 = &(*patPhotons[i]);
-  //         ExoDiPhotons::FillBasicPhotonInfo(fPhoton2Info, patPhoton2);
-  //         ExoDiPhotons::FillPhotonIDInfo(fPhoton2Info, patPhoton2, rho_, isSat);
-  //       }
-  //     }
-  //   }
-  // }
-
-  // if(genPhotons.size() > 1)
-  // {
-  //   sort(genPhotons.begin(), genPhotons.end(), ExoDiPhotons::comparePhotonsByPt);
-  //   const reco::GenParticle *genPhoton1 = &(*genPhotons.at(0));
-  //   const reco::GenParticle *genPhoton2 = &(*genPhotons.at(1));
-  //   ExoDiPhotons::FillGenParticleInfo(fGenPhoton1, genPhoton1);
-  //   ExoDiPhotons::FillGenParticleInfo(fGenPhoton2, genPhoton2);
-  //     if(patPhotons.size()==1)
-  //     {
-  //       sort(patPhotons.begin(), patPhotons.end(), ExoDiPhotons::comparePhotonsByPt);
-  //       const pat::Photon *patPhoton1 = &(*patPhotons.at(0));
-  //       double deltaR0  = reco::deltaR(genPhoton1->eta(), genPhoton1->phi(), patPhoton1->eta(), patPhoton1->phi());
-  //       double deltaR1  = reco::deltaR(genPhoton2->eta(), genPhoton2->phi(), patPhoton1->eta(), patPhoton1->phi());
-  //       //fPhoton1Info.isSaturated = ExoDiPhotons::isSaturated(patPhoton1, &(*recHitsEB), &(*recHitsEE), &(*subDetTopologyEB_), &(*subDetTopologyEE_));
-  //         if (deltaR0 <= deltaR1)
-  //         { ExoDiPhotons::FillBasicPhotonInfo(fPhoton1Info, patPhoton1);
-  //           ExoDiPhotons::FillPhotonIDInfo(fPhoton1Info, patPhoton1, rho_, isSat);
-  //         }
-  //         else
-  //         { ExoDiPhotons::FillBasicPhotonInfo(fPhoton2Info, patPhoton1);
-  //           ExoDiPhotons::FillPhotonIDInfo(fPhoton2Info, patPhoton1, rho_, isSat);
-  //         }
-  //     }
-  //
-  //    if(patPhotons.size() > 1)
-  //    {
-  //       std::vector<float> deltaR0, deltaR1;
-  //       for (size_t i = 0; i < patPhotons.size(); i++)
-  //       {
-  //       float deltar0 = reco::deltaR(genPhotons[0]->eta(), genPhotons[0]->phi(), patPhotons[i]->eta(), patPhotons[i]->phi());
-  //       float deltar1 = reco::deltaR(genPhotons[1]->eta(), genPhotons[1]->phi(), patPhotons[i]->eta(), patPhotons[i]->phi());
-  //       deltaR0.push_back(deltar0);
-  //       deltaR1.push_back(deltar1);
-  //       }
-  //       float deltaR0min = *std::min_element(deltaR0.begin(),deltaR0.end());
-  //       float deltaR1min = *std::min_element(deltaR1.begin(),deltaR1.end());
-  //
-  //       for(size_t i =0; i < deltaR0.size(); i++)
-  //       {
-  //         if(deltaR0min == deltaR0[i])
-  //         {
-  //           const pat::Photon *patPhoton1 = &(*patPhotons[i]);
-  //           //fPhoton1Info.isSaturated = ExoDiPhotons::isSaturated(patPhoton1, &(*recHitsEB), &(*recHitsEE), &(*subDetTopologyEB_), &(*subDetTopologyEE_));
-  //           ExoDiPhotons::FillBasicPhotonInfo(fPhoton1Info, patPhoton1);
-  //           ExoDiPhotons::FillPhotonIDInfo(fPhoton1Info, patPhoton1, rho_, isSat);
-  //           std::cout<<"Photon1  " <<patPhotons[i]->pt()<<std::endl;
-  //         }
-  //       }
-  //       for(size_t i =0; i < deltaR1.size(); i++)
-  //       {
-  //         if(deltaR1min == deltaR1[i])
-  //         {
-  //           const pat::Photon *patPhoton2 = &(*patPhotons[i]);
-  //           //fPhoton2Info.isSaturated = ExoDiPhotons::isSaturated(patPhoton2, &(*recHitsEB), &(*recHitsEE), &(*subDetTopologyEB_), &(*subDetTopologyEE_));
-  //           ExoDiPhotons::FillBasicPhotonInfo(fPhoton2Info, patPhoton2);
-  //           ExoDiPhotons::FillPhotonIDInfo(fPhoton2Info, patPhoton2, rho_, isSat);
-  //           std::cout<<"Photon2  " <<patPhotons[i]->pt()<<std::endl;
-  //         }
-  //       }
-  //     }
-  //   }
 
 
   fTree->Fill();
