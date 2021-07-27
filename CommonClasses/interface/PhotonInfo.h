@@ -253,7 +253,7 @@ namespace ExoDiPhotons
     // systematic variations, normalized to photon energy
 // I comment this because I faced runtime error :  Requested UserFloat ecalEnergyPreCorr is not available! Possible UserFloats are:
 // PhotonMVAEstimatorRun2Spring16NonTrigV1Values PhotonMVAEstimatorRunIIFall17v1Values PhotonMVAEstimatorRunIIFall17v1p1Values
-// phoChargedIsolation phoNeutralHadronIsolation phoPhotonIsolation phoWorstChargedIsolation 
+// phoChargedIsolation phoNeutralHadronIsolation phoPhotonIsolation phoWorstChargedIsolation
     // float energy = photon->energy();
     // photonInfo.ecalEnergyPreCorr = photon->userFloat("ecalEnergyPreCorr") / energy;
     // photonInfo.ecalEnergyErrPreCorr = photon->userFloat("ecalEnergyErrPreCorr") / energy;
@@ -314,6 +314,8 @@ namespace ExoDiPhotons
 
     // electron veto and high pT ID checks
     photonInfo.passElectronVeto = photon->passElectronVeto();
+    // photonInfo.passmyElectronVeto = !ConversionTools::hasMatchedPromptElectron(photonRef->superCluster(), *hElectrons, *hConversions, beamSpotHandle->position());
+
     photonInfo.passHTowOverE    = ExoDiPhotons::passHadTowerOverEmCut(photon);
     photonInfo.passChIso        = ExoDiPhotons::passChargedHadronCut(photon);
     photonInfo.passCorPhoIso    = ExoDiPhotons::passCorPhoIsoHighPtID(photon,rho);

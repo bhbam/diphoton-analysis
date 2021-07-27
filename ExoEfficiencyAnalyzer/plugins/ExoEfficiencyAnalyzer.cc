@@ -61,6 +61,7 @@
 
  // for photons
  #include "DataFormats/PatCandidates/interface/Photon.h"
+ #include "DataFormats/PatCandidates/interface/Electron.h"
 
  // for jets
  #include "DataFormats/PatCandidates/interface/Jet.h"
@@ -77,7 +78,7 @@
  // for trigger and filter decisions
  #include "DataFormats/Common/interface/TriggerResults.h"
  #include "FWCore/Common/interface/TriggerNames.h"
-
+ #include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
 ////-------------------------------------------------------------------------------------------------------------------
 
 //
@@ -132,6 +133,12 @@ class ExoEfficiencyAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResour
 
   edm::Service<TFileService> fs;
 
+  //edm::EDGetTokenT<reco::GsfElectronCollection> electronToken_;
+  // edm::EDGetTokenT<reco::ConversionCollection> hConversionsToken_;
+
+  edm::EDGetToken electronToken_;
+  edm::EDGetToken hConversionsToken_;
+
 
 
 
@@ -176,13 +183,19 @@ ExoEfficiencyAnalyzer::ExoEfficiencyAnalyzer(const edm::ParameterSet& iConfig)
     rhoToken_(consumes<double> (iConfig.getParameter<edm::InputTag>("rho"))),
     verticesToken_(consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("vertices"))),
     beamSpotToken_(consumes<reco::BeamSpot>(iConfig.getParameter<edm::InputTag>("beamSpot")))
+    // electronToken_(consumes<reco::GsfElectronCollection>(iConfig.getParameter<edm::InputTag>("electronSource"))),
+    // hConversionsToken_(consumes<reco::ConversionCollection>(iConfig.getParameter<edm::InputTag>("conversionSource")))
+    // electronToken_(consumes<edm::View<pat::Electron>>(iConfig.getParameter<edm::InputTag>("electronSource")))
+    // hConversionsToken_(consumes<reco::Conversion>(iConfig.getParameter<edm::InputTag>("conversionSource")))
 
 {
     // genParticlesToken_ = consumes<edm::View<reco::GenParticle> > (iConfig.getParameter<edm::InputTag>("genparticles"));
     // genInfoToken_ = consumes<GenEventInfoProduct> (iConfig.getParameter<edm::InputTag>("genInfo"));
     // pileupToken_ = consumes<std::vector<PileupSummaryInfo> >( edm::InputTag("slimmedAddPileupInfo") );
     // beamHaloSummaryToken_ = consumes<reco::BeamHaloSummary>( edm::InputTag("BeamHaloSummary") );
-    photonsMiniAODToken_ = consumes<edm::View<pat::Photon> > (iConfig.getParameter<edm::InputTag>("photonsMiniAOD"));
+    photonsMiniAODToken_ = consumes<edm::View<pat::Photon>> (iConfig.getParameter<edm::InputTag>("photonsMiniAOD"));
+    electronToken_ = consumes<edm::View<pat::Electron>> (iConfig.getParameter<edm::InputTag>("electronSource"));
+    hConversionsToken_ = consumes<edm::View<reco::Conversion>> (iConfig.getParameter<edm::InputTag>("conversionSource"));
     // recHitsEBTag_ = iConfig.getUntrackedParameter<edm::InputTag>("RecHitsEBTag",edm::InputTag("reducedEgamma:reducedEBRecHits"));
     // recHitsEETag_ = iConfig.getUntrackedParameter<edm::InputTag>("RecHitsEETag",edm::InputTag("reducedEgamma:reducedEERecHits"));
     // recHitsEBToken = consumes <edm::SortedCollection<EcalRecHit> > (recHitsEBTag_);
@@ -267,6 +280,17 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
   iEvent.getByToken(beamSpotToken_, beamSpotHandle);
 
 
+  // edm::Handle<reco::GsfElectronCollection> hElectrons;
+  // iEvent.getByToken(electronToken_, hElectrons);
+  //
+  // edm::Handle<reco::ConversionCollection> hConversions;
+  // iEvent.getByToken(hConversionsToken_, hConversions);
+
+  edm::Handle<edm::View<pat::Electron>> hElectrons;
+  iEvent.getByToken(electronToken_, hElectrons);
+
+  edm::Handle<edm::View<reco::Conversion>> hConversions;
+  iEvent.getByToken(hConversionsToken_, hConversions);
 
 
 
@@ -297,28 +321,28 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
   std::vector< edm::Ptr<const reco::GenParticle> > genPhotons;
   std::cout<<"Numer of gen Particles: "<<genParticles->size()<<std::endl;
 // for Photons------------------------------------------------
-  // for (size_t i = 0; i < genParticles->size(); ++i)
-  // {
-  //   edm::Ptr<const reco::GenParticle> gen = genParticles->ptrAt(i);
-  //   if (gen->status()==1 && gen->pdgId() == 22)
-  //   {
-  //       genPhotons.push_back(gen);// status still need to be make sure == 1 or == 3
-  //       std::cout<<"genPhoton  pt  :  " <<gen->pt()<<" ; eta  :  "<< gen->eta() <<" ; phi   :  "<< gen->phi()<< ";  status   :  "<<gen->status() <<std::endl;
-  //   }
-  // }
-  // std::cout<<"Numer of gen photons:   "<<genPhotons.size()<<std::endl;
-
-//for electrons------------------------------------------------
   for (size_t i = 0; i < genParticles->size(); ++i)
   {
     edm::Ptr<const reco::GenParticle> gen = genParticles->ptrAt(i);
-    if (gen->status()==1 && (gen->pdgId() == 11 || gen->pdgId() == -11))
+    if (gen->status()==1 && gen->pdgId() == 22)
     {
-      genPhotons.push_back(gen);// status still need to be make sure
-      std::cout<<"genElectron  pt  :  " <<gen->pt()<<" ; eta  :  "<< gen->eta() <<" ; phi   :  "<< gen->phi()<< " ; pdgId  :  "<< gen->pdgId()<<";  status   :  "<<gen->status() <<std::endl;
+        genPhotons.push_back(gen);// status still need to be make sure == 1 or == 3
+        std::cout<<"genPhoton  pt  :  " <<gen->pt()<<" ; eta  :  "<< gen->eta() <<" ; phi   :  "<< gen->phi()<< ";  status   :  "<<gen->status() <<std::endl;
     }
   }
-  std::cout<<"Numer of gen Electrons:   "<<genPhotons.size()<<std::endl;
+  std::cout<<"Numer of gen photons:   "<<genPhotons.size()<<std::endl;
+
+//for electrons------------------------------------------------
+  // for (size_t i = 0; i < genParticles->size(); ++i)
+  // {
+  //   edm::Ptr<const reco::GenParticle> gen = genParticles->ptrAt(i);
+  //   if (gen->status()==1 && (gen->pdgId() == 11 || gen->pdgId() == -11))
+  //   {
+  //     genPhotons.push_back(gen);// status still need to be make sure
+  //     std::cout<<"genElectron  pt  :  " <<gen->pt()<<" ; eta  :  "<< gen->eta() <<" ; phi   :  "<< gen->phi()<< " ; pdgId  :  "<< gen->pdgId()<<";  status   :  "<<gen->status() <<std::endl;
+  //   }
+  // }
+  // std::cout<<"Numer of gen Electrons:   "<<genPhotons.size()<<std::endl;
 //------------------------------------------------------------------------
 
 
@@ -347,6 +371,11 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
     std::cout<<"Photon1  pt:  "<<matchpatPhoton->pt()<<" ; eta:  "<<matchpatPhoton->eta()<<" ; phi:  "<<matchpatPhoton->phi()<<std::endl;
     ExoDiPhotons::FillBasicPhotonInfo(fPhoton1Info, matchpatPhoton);
     ExoDiPhotons::FillPhotonIDInfo(fPhoton1Info, matchpatPhoton, rho_, isSat);
+    ////----------------------------------------------CSEV Check------------------------------------------------------------------------------------------------
+    bool passmyElectronVeto = !ConversionTools::hasMatchedPromptElectron(matchpatPhoton->superCluster(), hElectrons, hConversions, beamSpotHandle->position());
+    std::cout<< "Def Veto Result  :" << matchpatPhoton->passElectronVeto() << "          my electron Veto Result  :" << passmyElectronVeto << std::endl;
+
+    ////--------------------------------------------------------------------------------------------------------------------------------------------------------------
     }
   }
 
@@ -369,7 +398,7 @@ ExoEfficiencyAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& 
     }
     if (matchpatPhoton)
     {
-      std::cout<<"Photon2:   pt  "<<matchpatPhoton->pt()<<"  eta  "<<matchpatPhoton->eta()<<"  phi  "<<matchpatPhoton->phi()<<std::endl;
+    std::cout<<"Photon2:   pt  "<<matchpatPhoton->pt()<<"  eta  "<<matchpatPhoton->eta()<<"  phi  "<<matchpatPhoton->phi()<<std::endl;
     ExoDiPhotons::FillBasicPhotonInfo(fPhoton2Info, matchpatPhoton);
     ExoDiPhotons::FillPhotonIDInfo(fPhoton2Info, matchpatPhoton, rho_, isSat);
     }
